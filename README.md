@@ -7,3 +7,10 @@ File -> Import -> Git/Projects from Git -> Clone URI: https://github.com/Elefthe
 the project url is: https://github.com/Eleftheria-99/educational-app.git
 when the prompt to select the kind of project appears, select Import as general project.
 No branch needed.( Master branch for back-end ) 
+
+
+Members of the team 
+
+https://github.com/maryVou
+https://github.com/manoslysikatos
+https://github.com/Eleftheria-99
