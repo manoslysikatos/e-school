@@ -1,0 +1,106 @@
+.header_lighter_grey {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background-color: #f7f7f7;
+	height: 30px;
+	color: white;
+	right: 0;
+}
+
+.header_light_grey {
+	position: fixed;
+	right: 0;
+	bottom: 0;
+	width: 100%;
+	background-color: #ccc;
+	color: #0D8A6D;
+	font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+	line-height: 1.9;
+	display: block;
+	/*Block level elements by default take up as much space as they can, and they cannot be placed on the same horizontal line with any other display modes, include other block elements. (Exception: unless they are floated)*/
+}
+
+#header {
+	background-color: #f7f7f7;
+	margin-bottom: 81px;
+	/* This ensures that there is a margin of 81px between the header of other elements */
+}
+
+<!--
+#DBDEDD__
+
+#header {
+	background-color: #ccc;
+	/* This shows the background color   color:#0D8A6D ;   #2b2927*/
+	margin-bottom: 15px;
+	/* This ensures that there is a margin of 25px between the header of other elements */
+	overflow: hidden;
+	/*Overflow hidden is used because we will be floating all children elements. */
+	box-shadow: 3px 3px 5px 6px #ccc; /*box shadow*/
+	width: 100%;
+}
+
+.wrap {
+	width: 1152px;
+	/* Sets the width of the elements to be 1152 pixels. */
+	margin: 0 auto;
+	/* Shorthand for margin. Auto on left and right allows .wrap to be centered in the browser */
+}
+
+#title-area {
+	display: block;
+	/* Display block allows setting of width and height values  */
+	line-height: 108px;
+	height: 108px;
+	/* height determines the amount of vertical space allocated for the header.
+
+  Also, a line-height that equals the height ensures that the element is centered on the horizontal axis */
+	width: 30%;
+	/*A small width is to ensure that there is space for navigational elements*/
+	float: left;
+	/* floating the title area left ensures that it can be placed side by side with the navigational elements, which would be floated to the left as well */
+}
+
+nav {
+	line-height: 108px;
+	height: 108px;
+	float: right;
+	width: 65%;
+}
+
+nav li {
+	display: inline;
+}
+
+nav ul {
+	text-transform: uppercase;
+	/* This is to convert all letters to uppercase */
+	text-align: justify;
+	/* text-align: justify and the following few lines of codes inclusive allows my navigation elements to have equal spaces within between them no matter how many elements there are.*/
+}
+
+nav ul:after {
+	content: '';
+	display: inline-block;
+	width: 100%;
+	height: 0;
+}
+
+nav a {
+	padding: 1em 0;
+}
+
+a {
+	text-decoration: none;
+	/* This removes the underline in anchor tags */
+}
+
+#title a, nav a,
+	/* This targets the <a> tag within #title and #nav respectively */
+	#title a:visited, nav a:visited
+	/* This targets links that were already visited before by the user  */
+	{
+	color: #0D8A6D; /*#faf3e7;*/
+}

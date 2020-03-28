@@ -1,0 +1,125 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style type="text/css">
+/* Style the header */
+/*
+RESPONISVE HEADER - body must become also responsive
+*/
+header {
+	background-color: #ccc;
+	/* This shows the background color */
+	margin-bottom: 25px;
+	/* This ensures that there is a margin of 25px between the header of other elements */
+	overflow: hidden;
+	 /*Overflow hidden is used because we will be floating all children elements. */
+	box-shadow: 3px 3px 5px 6px #ccc; /*box shadow*/
+	width: 100%;
+}
+
+.wrap {
+	width: 1152;
+	/* Sets the width of the elements to be 1152 pixels. */
+	margin: 0 auto;
+	/* Shorthand for margin. Auto on left and right allows .wrap to be centered in the browser */
+}
+
+#title-area {
+	display: block;
+	/* Display block allows setting of width and height values  */
+	line-height: 70px;
+	height: 50px;
+	/* height determines the amount of vertical space allocated for the header.
+
+    Also, a line-height that equals the height ensures that the element is centered on the horizontal axis */
+	width: 30%;
+	/*A small width is to ensure that there is space for navigational elements*/
+	float: left;
+	/* floating the title area left ensures that it can be placed side by side with the navigational elements, which would be floated to the left as well */
+}
+
+nav {
+	line-height: 150px;
+	height: 108px;
+	float: right;
+	width: 65%;
+}
+
+nav li {
+	display: inline;
+}
+
+nav ul {
+	text-transform: uppercase;
+	/* This is to convert all letters to uppercase */
+	text-align: justify;
+	/* text-align: justify and the following few lines of codes inclusive allows my navigation elements to have equal spaces within between them no matter how many elements there are.*/
+}
+
+nav ul:after {
+	content: '';
+	display: inline-block;
+	width: 100%;
+	height: 0;
+}
+
+nav a {
+	padding: 1em 0;
+}
+
+body {
+	font: "Montserrat", helvetica, arial, sans-serif;
+	/* This is a font shorthand that allows you to set many variables at one go, in this case its:
+  font weight:    normal;
+     font-size:      18px;
+       line-height:    1.5;
+  font-family:    "Montserrat", helvetica, arial, sans-serif; */
+}
+
+title, nav {
+	/* commas allow you to add more than one selector to have the same styles.
+Since we want the text in both #title and nav to be bold, we can specify font-weight: bold; to both of them in this manner */
+	font-weight: bold;
+}
+
+#title {
+	font-size: 60px;	/* This is to enlarge the font on the title text */
+}
+
+a {
+	text-decoration: none;	/* This removes the underline in anchor tags */
+}
+
+#title a, nav a,
+	/* This targets the <a> tag within #title and #nav respectively */
+	#title a:visited, nav a:visited
+	/* This targets links that were already visited before by the user  */
+	{
+	color: #0D8A6D;
+}
+</style>
+</head>
+<body>
+	<header>
+
+		<div class="wrap">   <!--header- wrapper -->
+			<div id="title-area">
+				<h1 id="title">
+					<a>edu-app</a>
+				</h1>
+			</div>
+			<nav>
+				<ul>
+					<li><a >APPLICATION</a></li>
+					<li><a >OTHER SERVICES</a></li>
+					<li><a >ANNOUNCEMENTS</a></li>
+					<li><a >CONTACTS</a></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+
