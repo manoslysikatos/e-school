@@ -30,13 +30,13 @@ body {
 		<div class="ui segment">
 			<pre>
 	                     	                                                                                                                  <a
-					href="/DistributedSystems/just-logged-out">Logout</a>
+					href="/Education/just-logged-out">Logout</a>
 	</pre>
        </div>
 	
 
 			<br /> Choose one of the following options! <br /> <br /> <br />
-			1. <br /> 
+			1. Admin User: Add or Remove users   <br /> 
 			2.  <br /> 
 			3. 
 			
