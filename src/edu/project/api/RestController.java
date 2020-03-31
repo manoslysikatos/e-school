@@ -36,7 +36,7 @@ public class RestController {
 		System.out.println("DS: ready to show: main menu for all users page");
 
 		//external sends username, retrieve form the database the password and then send it to the external 
-	 // returns object type of Users, which contains the username and the department
+	 // returns object type of Users, which contains the username and the password
 		return user;
 	}
 
