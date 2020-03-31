@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api")
-public class RestControllers {
+public class RestController {
 	
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
