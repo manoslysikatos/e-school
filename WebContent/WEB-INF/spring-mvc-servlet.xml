@@ -24,13 +24,14 @@
 			<value>/WEB-INF/application.properties</value>
 		</property>
 	</bean>
-	
+		
+		
 	<!-- Step 3: Add support for component scanning -->
-	<context:component-scan
-		base-package="edu.project" />
+	<context:component-scan base-package="edu.project" />
 
 	<!-- Step 4: Add support for conversion, formatting and validation support -->
 	<mvc:annotation-driven />
+	
 
 	<!-- Step 5: Define Spring MVC view resolver -->
 	<bean id="viewResolver"
@@ -38,20 +39,22 @@
 		<property name="prefix" value="/WEB-INF/view/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
-
-
-    <mongo:mongo id="mongo" host="${mongoDBHost}" port="${mongoDBPort}"  />
+	
+	<mongo:mongo id="mongo" host="${mongoDBHost}" port="${mongoDBPort}"  />
 
     <bean id="mongoCredientials" class="org.springframework.data.authentication.UserCredentials">
         <constructor-arg name="username" value="${mongoDBUserName}"/>
         <constructor-arg name="password" value="${mongoDBPassword}"/>
     </bean>
-
+    
+    
     <bean id="mongoDbFactory" class="org.springframework.data.mongodb.core.SimpleMongoDbFactory">
         <constructor-arg name="mongo" ref="mongo"/>
         <constructor-arg name="databaseName" value="${mongoDBName}"/>
         <constructor-arg name="credentials" ref="mongoCredientials"/>
     </bean>
+    
+   
 
     <mongo:mapping-converter id="mappingConverter" db-factory-ref="mongoDbFactory" />
 
@@ -60,24 +63,8 @@
         <constructor-arg name="mongoConverter" ref="mappingConverter"/>
     </bean>
     
-    
-    <!-- extra -->
-    <bean id="mongoClient" class="com.mongodb.MongoClient"> 
-    <constructor-arg> <bean class="com.mongodb.MongoClientURI">
-     <constructor-arg type="java.lang.String" value="mongodb://${mongo.db.user}:${mongo.db.password}@${mongo.db.host}:${mongo.db.port}/${mongo.db.database}"/> 
-     </bean> </constructor-arg>
-    
-    
-       
-    
-    
 
 	<!-- Add support for reading web resources: css, images, js, etc ... -->
 	<mvc:resources mapping="/resources/**"
 		location="/WEB-INF/resources"></mvc:resources>
-		
 </beans>
-
-
-
-	
