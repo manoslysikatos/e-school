@@ -3,9 +3,7 @@ package edu.project.controllers;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,10 +17,10 @@ public class HomePage_LogIn_MainMenuForAll_LogOut_Controller {
 		return "home-page";     //the user must click to the href: login in order to go to the login page
 	}
 	
-	
+	    
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String showLogInForAll() {
+	public String showLogInForAll() {    
 		
 		System.out.println("ready to show: log in page");
 		
