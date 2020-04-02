@@ -17,7 +17,7 @@ public class RestControllers {
 
 	//CREATE USERS 
 	@RequestMapping(value = "/user", method = RequestMethod.POST, produces = "application/json",  consumes = "application/json")
-    public Users addUser(@RequestBody Users user) {
+    public  Users addUser(@RequestBody Users user) {
 		System.out.println("Education: REST: creation of new user ");
             
     /*       sample data (raw-application/json)
@@ -29,16 +29,19 @@ public class RestControllers {
                     "sex": "male",
                     "email": "alekos@hua.gr",
                     "phone": "2102534712",
-                    "role": "alekos@hua.gr",
+                    "role": "teacher",
                     "points": 3
             }
     */
-                       
+          user= new Users("Alekos", "Alekos", "Alekos","Sakellarios", "male", "alekos@hua.gr", "2102534712", "teacher", 3);  
+          
+          
           //save the user in the database 
-    	
-    	
+             	
     	 //after the new user was successful saved in the database, return the user             
-            return user;
+          return user;
+            
+            
     }
 	
 	
@@ -47,7 +50,7 @@ public class RestControllers {
 	public @ResponseBody Users showMenu(HttpServletRequest request, @PathVariable String username) {
 		System.out.println("Education: ready to show: menu page");
 
-		Users user = new Users();
+		Users user= new Users("Alekos", "Alekos", "Alekos","Sakellarios", "male", "alekos@hua.gr", "2102534712", "teacher", 3); 
 		
 		//the external app sends username
 		
@@ -127,7 +130,7 @@ public class RestControllers {
 	public List<> returnAnnouncements(HttpServletRequest request, @PathVariable String username) {
 		System.out.println("Education: ready to show: menu page");
 		
-		private List<> theAnnouncements;
+		private List<>  ;
 		
 		//the external app sends username
 		

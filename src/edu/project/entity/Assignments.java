@@ -1,16 +1,29 @@
 package edu.project.entity;
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection="Assignments")
-public class Assignments {
+public class Assignments implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 	
 	@Id
+	@Column(name = "_id")
 	protected String _id;
+	
+	@Column(name = "assignment_type")
 	protected String assignment_type;
+	
+	@Column(name = "assignment")
 	protected String assignment;
-	protected String solutions;
+	
+	@Column(name = "solutions")
+	protected String solutions;   //array in mongodb
 	
 	
 	public Assignments(String _id, String assignment_type, String assignment, String solutions) {

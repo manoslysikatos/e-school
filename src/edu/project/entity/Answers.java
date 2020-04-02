@@ -1,14 +1,25 @@
 package edu.project.entity;
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection="Answers")
-public class Answers {
+public class Answers implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
+	@Column(name = "_id")
 	protected String _id;
+	
+	@Column(name = "student")
 	protected String student;
+	
+	@Column(name = "answer")
 	protected String answer;
 	
 		

@@ -1,19 +1,31 @@
 package edu.project.entity;
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection="Questions")
-public class Questions {
+public class Questions  implements Serializable{
 
+	private static final long serialVersionUID = 1L;
 	@Id
+	@Column(name = "_id")
 	protected String _id;
+	
+	@Column(name = "type")
 	protected String type; 
+	
+	@Column(name = "question")
 	protected String question;
-	protected String MC_answers;
+	
+	@Column(name = "MC_answers")
+	protected int MC_answers;   //array me ints
 	
 
-	public Questions(String type, String question, String mC_answers) {
+	public Questions(String type, String question, int mC_answers) {
 		super();
 		this.type = type;
 		this.question = question;
@@ -21,7 +33,7 @@ public class Questions {
 	}
 
 	
-	public Questions(String _id, String type, String question, String mC_answers) {
+	public Questions(String _id, String type, String question, int  mC_answers) {
 		super();
 		this._id = _id;
 		this.type = type;
@@ -52,10 +64,10 @@ public class Questions {
 	public void setQuestion(String question) {
 		this.question = question;
 	}
-	public String getMC_answers() {
+	public int getMC_answers() {
 		return MC_answers;
 	}
-	public void setMC_answers(String mC_answers) {
+	public void setMC_answers(int mC_answers) {
 		MC_answers = mC_answers;
 	}
 	

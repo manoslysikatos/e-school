@@ -1,17 +1,33 @@
 package edu.project.entity;
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection="Multimedia")
-public class Multimedia {
+public class Multimedia implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 	
 	@Id
+	@Column(name = "_id")
 	protected String _id;
+	
+	
+	@Column(name = "links")    //array
 	protected String links;
-	protected String videos;
-	protected String photos;
-	protected String announcements;
+	
+	@Column(name = "videos")
+	protected String videos;     //array
+	
+	@Column(name = "photos")
+	protected String photos;      //array
+	
+	@Column(name = "announcements")
+	protected String announcements;    //array
 	
 	
 	

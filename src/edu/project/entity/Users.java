@@ -1,20 +1,45 @@
 package edu.project.entity;
+import java.io.Serializable;
+
+import javax.persistence.Column;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection="Users")
-public class Users {
+public class Users implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 	
 	@Id
+	@Column(name = "_id")
 	protected String _id;
+	
+	@Column(name = "username")
 	protected String username;
+	
+	@Column(name = "password")
 	protected String password;
+	
+	@Column(name = "fname")
 	protected String fname;
+	
+	@Column(name = "lname")
 	protected String lname;
+	
+	@Column(name = "sex")
 	protected String sex;
+	
+	@Column(name = "email")
 	protected String email;
+	
+	@Column(name = "phone")
 	protected String phone;
+	
+	@Column(name = "role")
 	protected String role;
+	
+	@Column(name = "points")
 	protected int points;
 	
 	

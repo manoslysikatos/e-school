@@ -1,18 +1,37 @@
 package edu.project.entity;
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection="Classes")
-public class Classes {
+public class Classes implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 	
 	@Id
+	@Column(name = "_id")
 	protected String _id;
+	
+	@Column(name = "subject")
 	protected String subject;
+	
+	@Column(name = "teacher")
 	protected String teacher;
+	
+	@Column(name = "students")
 	protected String students;
+	
+	@Column(name = "quiz_ids")
 	protected String quiz_ids; //int or string 
+	
+	@Column(name = "assignment_ids")
 	protected String assignment_ids;
+	
+	@Column(name = "multimedia_ids")
 	protected String multimedia_ids;
 		
 	
