@@ -6,6 +6,7 @@ import javax.persistence.Column;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document(collection="Quizes")
 public class Quizes implements Serializable{
@@ -13,20 +14,23 @@ public class Quizes implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@Column(name = "_id")
-	protected String _id;
+	protected String id;
 	
-	@Column(name = "title")
+	@Field(name = "title")
 	protected String title;
 	
-	@Column(name = "date")
+	@Field(name = "date")
 	protected String date;
 	
-	@Column(name = "questions")
-	protected String questions;   //array in mongodb
+	@Field(name = "questions")
+	protected String questions[];   //array in mongodb                   WHAT CONTAINS ?????
+	
+	public Quizes() {
+		super();
+	}
 	
 	
-	public Quizes(String title, String date, String questions) {
+	public Quizes(String title, String date, String questions[]) {
 		super();
 		this.title = title;
 		this.date = date;
@@ -34,24 +38,13 @@ public class Quizes implements Serializable{
 	}
 	
 	
-	public Quizes(String _id, String title, String date, String questions) {
+	public Quizes(String id, String title, String date, String questions[]) {
 		super();
-		this._id = _id;
+		this.id = id;
 		this.title = title;
 		this.date = date;
 		this.questions = questions;
 	}
-
-	public String get_id() {
-		return _id;
-	}
-
-
-	public void set_id(String _id) {
-		this._id = _id;
-	}
-
-
 	public String getTitle() {
 		return title;
 	}
@@ -64,13 +57,29 @@ public class Quizes implements Serializable{
 	public void setDate(String date) {
 		this.date = date;
 	}
-	public String getQuestions() {
+
+
+	public String getId() {
+		return id;
+	}
+
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+
+	public String[] getQuestions() {
 		return questions;
 	}
-	public void setQuestions(String questions) {
+
+
+	public void setQuestions(String[] questions) {
 		this.questions = questions;
 	}
-	
+
+
+
 	
 
 }

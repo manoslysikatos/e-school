@@ -5,6 +5,7 @@ import javax.persistence.Column;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document(collection="Users")
 public class Users implements Serializable{
@@ -12,41 +13,43 @@ public class Users implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@Column(name = "_id")
-	protected String _id;
+	protected String id;
 	
-	@Column(name = "username")
+	@Field(name = "username")
 	protected String username;
 	
-	@Column(name = "password")
+	@Field(name = "password")
 	protected String password;
 	
-	@Column(name = "fname")
+	@Field(name = "fname")
 	protected String fname;
 	
-	@Column(name = "lname")
+	@Field(name = "lname")
 	protected String lname;
 	
-	@Column(name = "sex")
+	@Field(name = "sex")
 	protected String sex;
 	
-	@Column(name = "email")
+	@Field(name = "email")
 	protected String email;
 	
-	@Column(name = "phone")
+	@Field(name = "phone")
 	protected String phone;
 	
-	@Column(name = "role")
+	@Field(name = "role")
 	protected String role;
 	
-	@Column(name = "points")
+	@Field(name = "points")
 	protected int points;
 	
+	public Users( ) {
+		super();
+	}
 	
 	public Users(String _id, String username, String password, String fname, String lname, String sex, String email,
 			String phone, String role, int points) {
 		super();
-		this._id = _id;
+		this.id = _id;
 		this.username = username;
 		this.password = password;
 		this.fname = fname;
@@ -74,13 +77,13 @@ public class Users implements Serializable{
 	}
 
 
-	public String get_id() {
-		return _id;
+	public String getId() {
+		return id;
 	}
 
 
-	public void set_id(String _id) {
-		this._id = _id;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 

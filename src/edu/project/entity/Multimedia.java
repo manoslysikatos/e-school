@@ -6,6 +6,7 @@ import javax.persistence.Column;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document(collection="Multimedia")
 public class Multimedia implements Serializable{
@@ -13,79 +14,83 @@ public class Multimedia implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@Column(name = "_id")
-	protected String _id;
+	protected String id; 	
+	
+	@Field(name = "links")    //array
+	protected String links[];
+	
+	@Field(name = "videos")
+	protected String videos[];     //array
+	
+	@Field(name = "photos")
+	protected String photos[];      //array
+	
+	@Field(name = "announcements")
+	protected String announcements[];    //array
+
 	
 	
-	@Column(name = "links")    //array
-	protected String links;
-	
-	@Column(name = "videos")
-	protected String videos;     //array
-	
-	@Column(name = "photos")
-	protected String photos;      //array
-	
-	@Column(name = "announcements")
-	protected String announcements;    //array
-	
-	
-	
-	public Multimedia(String links, String videos, String photos, String announcements) {
+	public Multimedia() {
+		super();
+	}
+
+	public Multimedia( String[] links, String[] videos, String[] photos, String[] announcements) {
 		super();
 		this.links = links;
 		this.videos = videos;
 		this.photos = photos;
 		this.announcements = announcements;
 	}
-	
-	
-	
-	public Multimedia(String _id, String links, String videos, String photos, String announcements) {
+
+	public Multimedia(String id, String[] links, String[] videos, String[] photos, String[] announcements) {
 		super();
-		this._id = _id;
+		this.id = id;
 		this.links = links;
 		this.videos = videos;
 		this.photos = photos;
 		this.announcements = announcements;
 	}
 
-	public String get_id() {
-		return _id;
+	public String getId() {
+		return id;
 	}
 
-
-
-	public void set_id(String _id) {
-		this._id = _id;
+	public void setId(String id) {
+		this.id = id;
 	}
 
-
-
-	public String getLinks() {
+	public String[] getLinks() {
 		return links;
 	}
-	public void setLinks(String links) {
+
+	public void setLinks(String[] links) {
 		this.links = links;
 	}
-	public String getVideos() {
+
+	public String[] getVideos() {
 		return videos;
 	}
-	public void setVideos(String videos) {
+
+	public void setVideos(String[] videos) {
 		this.videos = videos;
 	}
-	public String getPhotos() {
+
+	public String[] getPhotos() {
 		return photos;
 	}
-	public void setPhotos(String photos) {
+
+	public void setPhotos(String[] photos) {
 		this.photos = photos;
 	}
-	public String getAnnouncements() {
+
+	public String[] getAnnouncements() {
 		return announcements;
 	}
-	public void setAnnouncements(String announcements) {
+
+	public void setAnnouncements(String[] announcements) {
 		this.announcements = announcements;
 	}
+	
 
 	
 	

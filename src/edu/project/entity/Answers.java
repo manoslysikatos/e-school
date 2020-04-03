@@ -6,6 +6,7 @@ import javax.persistence.Column;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document(collection="Answers")
 public class Answers implements Serializable{
@@ -13,19 +14,21 @@ public class Answers implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "_id")
-	protected String _id;
+	protected String id;
 	
-	@Column(name = "student")
+	@Field(name = "student")
 	protected String student;
 	
-	@Column(name = "answer")
+	@Field(name = "answer")
 	protected String answer;
 	
-		
-	public Answers(String _id, String student, String answer) {
+	public Answers() {
 		super();
-		this._id = _id;
+	}
+		
+	public Answers(String id, String student, String answer) {
+		super();
+		this.id = id;
 		this.student = student;
 		this.answer = answer;
 	}
@@ -34,14 +37,12 @@ public class Answers implements Serializable{
 		this.student = student;
 		this.answer = answer;
 	}
-	
-	
-	
+		
 	public String get_id() {
-		return _id;
+		return id;
 	}
 	public void set_id(String _id) {
-		this._id = _id;
+		this.id = _id;
 	}
 	public String getStudent() {
 		return student;
@@ -55,8 +56,6 @@ public class Answers implements Serializable{
 	public void setAnswer(String answer) {
 		this.answer = answer;
 	}
-	
-	
 	
 	
 }

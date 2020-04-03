@@ -1,5 +1,6 @@
 package edu.project.api;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -8,7 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import edu.project.entity.Users;
+import edu.project.entity.*;
 
 
 @RestController
@@ -61,14 +62,43 @@ public class RestControllers {
 	}
 	
 	
+	//ME TO POY FORTWNEI TO MENU , MIA LISTA 
+		@RequestMapping(value = "/login/menu/information/{username}", method = RequestMethod.GET, produces = "application/json",  consumes = "application/json")
+		public String LISTS (HttpServletRequest request, @PathVariable String username) {
+			System.out.println("Education: ready to show: menu page");
+
+			
+			
+			//the external sends the username and i find in the database 
+       //SEND TO THE EXTERNAL JSON WHICH  
+	String json = "[{\"subject\" : \"Maths\", \"teacher\": \"Malvinaki Vamvakari\", \"students\": [\"Mary\" , \"Eleftheria\", \"Manos\"], \"quiz_ids\": [ ObjectId(\"507f191e810c19729de860ea\"), ObjectId(\"507f191e810c19729de860ea\") ]\"assignment_ids\": [ObjectId(\"507f191e810c19729de860ea\"), ObjectId(\"507f191e810c19729de860ea\") ]\"multimedia_ids\": [ ObjectId(\"507f191e810c19729de860ea\"), ObjectId(\"507f191e810c19729de860ea\")]}, {\\\"subject\\\" : \\\"Maths\\\", \\\"teacher\\\": \\\"Malvinaki Vamvakari\\\", \\\"students\\\": [\\\"Mary\\\" , \\\"Eleftheria\\\", \\\"Manos\\\"], \\\"quiz_ids\\\": [ ObjectId(\\\"507f191e810c19729de860ea\\\"), ObjectId(\\\"507f191e810c19729de860ea\\\") ]\\\"assignment_ids\\\": [ObjectId(\\\"507f191e810c19729de860ea\\\"), ObjectId(\\\"507f191e810c19729de860ea\\\") ]\\\"multimedia_ids\\\": [ ObjectId(\\\"507f191e810c19729de860ea\\\"), ObjectId(\\\"507f191e810c19729de860ea\\\")]}]";   
+		
 	
-	//MENU --> OPTIONS --> RESULTS 
+	
+	
+	
+	return json ;
+		}
+	
+	
+	//STUDENTS: MENU --> OPTIONS --> RESULTS 
 	//PROJECTS
-	@RequestMapping(value = "/login/menu/projects", method = RequestMethod.GET, produces = "application/json",  consumes = "application/json")
-	public List<> returnprojects(HttpServletRequest request, @PathVariable String username) {
+	@RequestMapping(value = "/login/menu/projects/{teacher}/{class}", method = RequestMethod.GET, produces = "application/json",  consumes = "application/json")
+	public List<Assignments> returnAssignments(HttpServletRequest request) {
 		System.out.println("Education: ready to show: menu page");
 		
-		private List<> theProjects;
+	    List<Assignments> theProjects = new ArrayList<>();  //Assignments 
+		
+		Assignments assingment1 = new Assignments("1", "assignment_type", "This is your assignment ", solutions);  //solutions-> array 
+		Assignments assingment2 = new Assignments("2", "assignment_type", "This is your assignment ", solutions);  //solutions-> array 
+
+		theProjects.add(assingment1);
+		theProjects.add(assingment2);
+		
+		
+		String json = "{\"Title\": \"This is the home-page\"}";
+		
+		String json2 = "[{\"_id\": \"ObjectId(...)\", \"class\": \"MAths\",\"assignment\": \"To be or not to be. Analyze it.\",\"assignment_type\": \"text\",\"solutions\": [{\"student\": \"Mary\",\"solution\": \"death is all around us\"}]}]";
 		
 		//the external app sends username
 		
@@ -80,13 +110,17 @@ public class RestControllers {
 	
 	
 	//QUIZES 
-	@RequestMapping(value = "/login/menu/quizes", method = RequestMethod.GET, produces = "application/json",  consumes = "application/json")
-	public List<> returnquizes(HttpServletRequest request, @PathVariable String username) {
+	@RequestMapping(value = "/login/menu/quizes/{teacher}/{class}", method = RequestMethod.GET, produces = "application/json",  consumes = "application/json")
+	public List<Quizes> returnquizes(HttpServletRequest request) {  //, @PathVariable String username
 		System.out.println("Education: ready to show: menu page");
 		
-		private List<> theQuizes;
-		
-		//the external app sends username
+		List<Quizes> theQuizes = new ArrayList<>();
+		Quizes quiz = new Quizes("1", "title", "date", "questions");  
+		Quizes quiz1 = new Quizes("2", "title", "date", "questions");  
+		Quizes quiz2 = new Quizes("3", "title", "date", "questions");  
+		theQuizes.add(quiz);
+		theQuizes.add(quiz1);
+		theQuizes.add(quiz2);
 		
 		//retrieve from the database the quizes and then send them to the external 
 		
@@ -95,8 +129,8 @@ public class RestControllers {
 	}
 	
 	//READINGS 
-	@RequestMapping(value = "/login/menu/readings", method = RequestMethod.GET, produces = "application/json",  consumes = "application/json")
-	public List<> returnReadings(HttpServletRequest request, @PathVariable String username) {
+	@RequestMapping(value = "/login/menu/readings/{teacher}/{class}", method = RequestMethod.GET, produces = "application/json",  consumes = "application/json")
+	public List<> returnReadings(HttpServletRequest request) {
 		System.out.println("Education: ready to show: menu page");
 		
 		private List<> theQuizes;
@@ -111,8 +145,8 @@ public class RestControllers {
 	
 
 	//CRAFTS
-	@RequestMapping(value = "/login/menu/crafts", method = RequestMethod.GET, produces = "application/json",  consumes = "application/json")
-	public List<> returnCrafts(HttpServletRequest request, @PathVariable String username) {
+	@RequestMapping(value = "/login/menu/crafts/{teacher}/{class}", method = RequestMethod.GET, produces = "application/json",  consumes = "application/json")
+	public List<> returnCrafts(HttpServletRequest request) {
 		System.out.println("Education: ready to show: menu page");
 		
 		private List<> theReadings;
@@ -126,11 +160,11 @@ public class RestControllers {
 	}
 	
 	//ANNOUNCEMENTS 
-	@RequestMapping(value = "/login/menu/announcements", method = RequestMethod.GET, produces = "application/json",  consumes = "application/json")
-	public List<> returnAnnouncements(HttpServletRequest request, @PathVariable String username) {
+	@RequestMapping(value = "/login/menu/announcements/{teacher}/{class}", method = RequestMethod.GET, produces = "application/json",  consumes = "application/json")
+	public List<> returnAnnouncements(HttpServletRequest request) {
 		System.out.println("Education: ready to show: menu page");
 		
-		private List<>  ;
+		private List<> theAnnouncements   ;
 		
 		//the external app sends username
 		
