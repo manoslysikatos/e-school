@@ -62,41 +62,41 @@ public class RestControllers {
 	}
 	
 	
-	//ME TO POY FORTWNEI TO MENU , MIA LISTA 
-		@RequestMapping(value = "/login/menu/information/{username}", method = RequestMethod.GET, produces = "application/json",  consumes = "application/json")
-		public String LISTS (HttpServletRequest request, @PathVariable String username) {
+	//ME TO POY FORTWNEI TO MENU , MIA LISTA me classes 
+		@RequestMapping(value = "/login/menu/information/{username}", method = RequestMethod.GET,  consumes = "application/json")
+		public String classList (HttpServletRequest request, @PathVariable String username) {
 			System.out.println("Education: ready to show: menu page");
 
 			
-			
 			//the external sends the username and i find in the database 
-       //SEND TO THE EXTERNAL JSON WHICH  
-	String json = "[{\"subject\" : \"Maths\", \"teacher\": \"Malvinaki Vamvakari\", \"students\": [\"Mary\" , \"Eleftheria\", \"Manos\"], \"quiz_ids\": [ ObjectId(\"507f191e810c19729de860ea\"), ObjectId(\"507f191e810c19729de860ea\") ]\"assignment_ids\": [ObjectId(\"507f191e810c19729de860ea\"), ObjectId(\"507f191e810c19729de860ea\") ]\"multimedia_ids\": [ ObjectId(\"507f191e810c19729de860ea\"), ObjectId(\"507f191e810c19729de860ea\")]}, {\\\"subject\\\" : \\\"Maths\\\", \\\"teacher\\\": \\\"Malvinaki Vamvakari\\\", \\\"students\\\": [\\\"Mary\\\" , \\\"Eleftheria\\\", \\\"Manos\\\"], \\\"quiz_ids\\\": [ ObjectId(\\\"507f191e810c19729de860ea\\\"), ObjectId(\\\"507f191e810c19729de860ea\\\") ]\\\"assignment_ids\\\": [ObjectId(\\\"507f191e810c19729de860ea\\\"), ObjectId(\\\"507f191e810c19729de860ea\\\") ]\\\"multimedia_ids\\\": [ ObjectId(\\\"507f191e810c19729de860ea\\\"), ObjectId(\\\"507f191e810c19729de860ea\\\")]}]";   
+			
+			
+			
+           //SEND TO THE EXTERNAL JSON WHICH  contains the list with the classes 
+	       String json = "[{\"subject\" : \"Maths\", \"teacher\": \"Malvinaki Vamvakari\", \"students\": [\"Mary\" , \"Eleftheria\", \"Manos\"], \"quiz_ids\": [ ObjectId(\"507f191e810c19729de860ea\"), ObjectId(\"507f191e810c19729de860ea\") ]\"assignment_ids\": [ObjectId(\"507f191e810c19729de860ea\"), ObjectId(\"507f191e810c19729de860ea\") ]\"multimedia_ids\": [ ObjectId(\"507f191e810c19729de860ea\"), ObjectId(\"507f191e810c19729de860ea\")]}, {\\\"subject\\\" : \\\"Maths\\\", \\\"teacher\\\": \\\"Malvinaki Vamvakari\\\", \\\"students\\\": [\\\"Mary\\\" , \\\"Eleftheria\\\", \\\"Manos\\\"], \\\"quiz_ids\\\": [ ObjectId(\\\"507f191e810c19729de860ea\\\"), ObjectId(\\\"507f191e810c19729de860ea\\\") ]\\\"assignment_ids\\\": [ObjectId(\\\"507f191e810c19729de860ea\\\"), ObjectId(\\\"507f191e810c19729de860ea\\\") ]\\\"multimedia_ids\\\": [ ObjectId(\\\"507f191e810c19729de860ea\\\"), ObjectId(\\\"507f191e810c19729de860ea\\\")]}]";   
 		
 	
-	
-	
-	
-	return json ;
+	       return json ;
 		}
 	
 	
 	//STUDENTS: MENU --> OPTIONS --> RESULTS 
 	//PROJECTS
-	@RequestMapping(value = "/login/menu/projects/{teacher}/{class}", method = RequestMethod.GET, produces = "application/json",  consumes = "application/json")
-	public List<Assignments> returnAssignments(HttpServletRequest request) {
+	@RequestMapping(value = "/login/menu/projects", method = RequestMethod.GET, consumes = "application/json")   // produces = "application/json", 
+	//List<Assignments>
+	public String returnAssignments(HttpServletRequest request) {
 		System.out.println("Education: ready to show: menu page");
 		
 	    List<Assignments> theProjects = new ArrayList<>();  //Assignments 
 		
-		Assignments assingment1 = new Assignments("1", "assignment_type", "This is your assignment ", solutions);  //solutions-> array 
-		Assignments assingment2 = new Assignments("2", "assignment_type", "This is your assignment ", solutions);  //solutions-> array 
+		//Assignments assingment1 = new Assignments("1", "assignment_type", "This is your assignment ", solutions);  //solutions-> array 
+		//Assignments assingment2 = new Assignments("2", "assignment_type", "This is your assignment ", solutions);  //solutions-> array 
 
-		theProjects.add(assingment1);
-		theProjects.add(assingment2);
+//		theProjects.add(assingment1);
+//		theProjects.add(assingment2);
+//		
 		
-		
-		String json = "{\"Title\": \"This is the home-page\"}";
+		//String json = "{\"Title\": \"This is the home-page\"}";
 		
 		String json2 = "[{\"_id\": \"ObjectId(...)\", \"class\": \"MAths\",\"assignment\": \"To be or not to be. Analyze it.\",\"assignment_type\": \"text\",\"solutions\": [{\"student\": \"Mary\",\"solution\": \"death is all around us\"}]}]";
 		
@@ -105,19 +105,20 @@ public class RestControllers {
 		//retrieve from the database the projects and then send them to the external 
 		
 	   // returns object type of Users, which contains the username and the password
-		return theProjects;
+		return json2;     //thePrjects 
 	}
 	
 	
 	//QUIZES 
-	@RequestMapping(value = "/login/menu/quizes/{teacher}/{class}", method = RequestMethod.GET, produces = "application/json",  consumes = "application/json")
+	@RequestMapping(value = "/login/menu/quizes", method = RequestMethod.GET, produces = "application/json",  consumes = "application/json")
 	public List<Quizes> returnquizes(HttpServletRequest request) {  //, @PathVariable String username
 		System.out.println("Education: ready to show: menu page");
 		
+		String[] questions = new String [] {"test3","test4","test5"};
 		List<Quizes> theQuizes = new ArrayList<>();
-		Quizes quiz = new Quizes("1", "title", "date", "questions");  
-		Quizes quiz1 = new Quizes("2", "title", "date", "questions");  
-		Quizes quiz2 = new Quizes("3", "title", "date", "questions");  
+		Quizes quiz = new Quizes("1", "title", "date", questions);  
+		Quizes quiz1 = new Quizes("2", "title", "date",  questions);  
+		Quizes quiz2 = new Quizes("3", "title", "date",  questions);  
 		theQuizes.add(quiz);
 		theQuizes.add(quiz1);
 		theQuizes.add(quiz2);
@@ -128,51 +129,51 @@ public class RestControllers {
 		return theQuizes;
 	}
 	
-	//READINGS 
-	@RequestMapping(value = "/login/menu/readings/{teacher}/{class}", method = RequestMethod.GET, produces = "application/json",  consumes = "application/json")
-	public List<> returnReadings(HttpServletRequest request) {
-		System.out.println("Education: ready to show: menu page");
-		
-		private List<> theQuizes;
-		
-		//the external app sends username
-		
-		//retrieve from the database the projects and then send them to the external 
-		
-	   //  returns the list with the
-		return theQuizes;
-	}
-	
-
-	//CRAFTS
-	@RequestMapping(value = "/login/menu/crafts/{teacher}/{class}", method = RequestMethod.GET, produces = "application/json",  consumes = "application/json")
-	public List<> returnCrafts(HttpServletRequest request) {
-		System.out.println("Education: ready to show: menu page");
-		
-		private List<> theReadings;
-		
-		//the external app sends username
-		
-		//retrieve from the database the projects and then send them to the external 
-		
-	   // returns the list with the
-		return theReadings;
-	}
-	
-	//ANNOUNCEMENTS 
-	@RequestMapping(value = "/login/menu/announcements/{teacher}/{class}", method = RequestMethod.GET, produces = "application/json",  consumes = "application/json")
-	public List<> returnAnnouncements(HttpServletRequest request) {
-		System.out.println("Education: ready to show: menu page");
-		
-		private List<> theAnnouncements   ;
-		
-		//the external app sends username
-		
-		//retrieve from the database the projects and then send them to the external 
-		
-	   //  returns the list with the
-		return theAnnouncements;
-	}
+//	//READINGS 
+//	@RequestMapping(value = "/login/menu/readings", method = RequestMethod.GET, produces = "application/json",  consumes = "application/json")
+//	public List<> returnReadings(HttpServletRequest request) {
+//		System.out.println("Education: ready to show: menu page");
+//		
+//		private List<> theQuizes;
+//		
+//		//the external app sends username
+//		
+//		//retrieve from the database the projects and then send them to the external 
+//		
+//	   //  returns the list with the
+//		return theQuizes;
+//	}
+//	
+//
+//	//CRAFTS
+//	@RequestMapping(value = "/login/menu/crafts", method = RequestMethod.GET, produces = "application/json",  consumes = "application/json")
+//	public List<> returnCrafts(HttpServletRequest request) {
+//		System.out.println("Education: ready to show: menu page");
+//		
+//		private List<> theReadings;
+//		
+//		//the external app sends username
+//		
+//		//retrieve from the database the projects and then send them to the external 
+//		
+//	   // returns the list with the
+//		return theReadings;
+//	}
+//	
+//	//ANNOUNCEMENTS 
+//	@RequestMapping(value = "/login/menu/announcements", method = RequestMethod.GET, produces = "application/json",  consumes = "application/json")
+//	public List<> returnAnnouncements(HttpServletRequest request) {
+//		System.out.println("Education: ready to show: menu page");
+//		
+//		private List<> theAnnouncements   ;
+//		
+//		//the external app sends username
+//		
+//		//retrieve from the database the projects and then send them to the external 
+//		
+//	   //  returns the list with the
+//		return theAnnouncements;
+//	}
 	
 	
 	
