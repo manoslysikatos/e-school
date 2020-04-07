@@ -1,8 +1,6 @@
 package edu.project.entity;
 import java.io.Serializable;
 
-import javax.persistence.Column;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;

@@ -4,21 +4,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import edu.project.entity.*;
 
 
-@RestController
-@RequestMapping("/api")
+@RestController 
+@RequestMapping("/api")                           
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class RestControllers {
+	
 
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+    public String hello() {
+		return "Hello";
+	}
+            
+            
 	//CREATE USERS 
-	@RequestMapping(value = "/user", method = RequestMethod.POST, produces = "application/json",  consumes = "application/json")
-    public  Users addUser(@RequestBody Users user) {
+	@RequestMapping(value = "/user", method = RequestMethod.POST, produces = "application/json")    //DEN LEITOYRGEI 
+    public Users addUser() {    //@RequestBody Users user
 		System.out.println("Education: REST: creation of new user ");
             
     /*       sample data (raw-application/json)
@@ -34,20 +39,18 @@ public class RestControllers {
                     "points": 3
             }
     */
-          user= new Users("Alekos", "Alekos", "Alekos","Sakellarios", "male", "alekos@hua.gr", "2102534712", "teacher", 3);  
+		Users user = new Users("Alekos", "Alekos", "Alekos","Sakellarios", "male", "alekos@hua.gr", "2102534712", "teacher", 3);  
           
           
           //save the user in the database 
              	
     	 //after the new user was successful saved in the database, return the user             
-          return user;
-            
-            
+          return user;       
     }
 	
 	
 	//LOGIN 
-	@RequestMapping(value = "/login/menu/{username}", method = RequestMethod.GET, produces = "application/json",  consumes = "application/json")
+	@RequestMapping(value = "/login/menu/{username}", method = RequestMethod.GET, produces = "application/json")
 	public @ResponseBody Users showMenu(HttpServletRequest request, @PathVariable String username) {
 		System.out.println("Education: ready to show: menu page");
 
@@ -63,7 +66,7 @@ public class RestControllers {
 	
 	
 	//ME TO POY FORTWNEI TO MENU , MIA LISTA me classes 
-		@RequestMapping(value = "/login/menu/information/{username}", method = RequestMethod.GET,  consumes = "application/json")
+		@RequestMapping(value = "/login/menu/information/{username}", method = RequestMethod.GET)   //,  consumes = "application/json"
 		public String classList (HttpServletRequest request, @PathVariable String username) {
 			System.out.println("Education: ready to show: menu page");
 
@@ -75,16 +78,15 @@ public class RestControllers {
            //SEND TO THE EXTERNAL JSON WHICH  contains the list with the classes 
 	       String json = "[{\"subject\" : \"Maths\", \"teacher\": \"Malvinaki Vamvakari\", \"students\": [\"Mary\" , \"Eleftheria\", \"Manos\"], \"quiz_ids\": [ ObjectId(\"507f191e810c19729de860ea\"), ObjectId(\"507f191e810c19729de860ea\") ]\"assignment_ids\": [ObjectId(\"507f191e810c19729de860ea\"), ObjectId(\"507f191e810c19729de860ea\") ]\"multimedia_ids\": [ ObjectId(\"507f191e810c19729de860ea\"), ObjectId(\"507f191e810c19729de860ea\")]}, {\\\"subject\\\" : \\\"Maths\\\", \\\"teacher\\\": \\\"Malvinaki Vamvakari\\\", \\\"students\\\": [\\\"Mary\\\" , \\\"Eleftheria\\\", \\\"Manos\\\"], \\\"quiz_ids\\\": [ ObjectId(\\\"507f191e810c19729de860ea\\\"), ObjectId(\\\"507f191e810c19729de860ea\\\") ]\\\"assignment_ids\\\": [ObjectId(\\\"507f191e810c19729de860ea\\\"), ObjectId(\\\"507f191e810c19729de860ea\\\") ]\\\"multimedia_ids\\\": [ ObjectId(\\\"507f191e810c19729de860ea\\\"), ObjectId(\\\"507f191e810c19729de860ea\\\")]}]";   
 		
-	
-	       return json ;
+           return json ;
 		}
 	
 	
 	//STUDENTS: MENU --> OPTIONS --> RESULTS 
 	//PROJECTS
-	@RequestMapping(value = "/login/menu/projects", method = RequestMethod.GET, consumes = "application/json")   // produces = "application/json", 
+	@RequestMapping(value = "/login/menu/projects", method = RequestMethod.GET)   // produces = "application/json",consumes = "application/json"
 	//List<Assignments>
-	public String returnAssignments(HttpServletRequest request) {
+	public String returnAssignments( ) {
 		System.out.println("Education: ready to show: menu page");
 		
 	    List<Assignments> theProjects = new ArrayList<>();  //Assignments 
@@ -110,7 +112,7 @@ public class RestControllers {
 	
 	
 	//QUIZES 
-	@RequestMapping(value = "/login/menu/quizes", method = RequestMethod.GET, produces = "application/json",  consumes = "application/json")
+	@RequestMapping(value = "/login/menu/quizes", method = RequestMethod.GET, produces = "application/json")  //,  consumes = "application/json"
 	public List<Quizes> returnquizes(HttpServletRequest request) {  //, @PathVariable String username
 		System.out.println("Education: ready to show: menu page");
 		
