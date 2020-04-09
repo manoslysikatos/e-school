@@ -4,9 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+
+import org.bson.Document;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoDatabase;
+import javax.servlet.http.HttpSession;
+
 import edu.project.entity.*;
+import edu.project.database.*;
 
 
 @RestController 
@@ -14,6 +23,13 @@ import edu.project.entity.*;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class RestControllers {
 	
+	// inject the DAO
+	@Autowired
+	private DAO DAO;
+
+	private MongoDatabase mongodb;
+	
+	private FindIterable<Document> user_result;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
     public String hello() {
@@ -22,7 +38,7 @@ public class RestControllers {
             
             
 	//CREATE USERS 
-	@RequestMapping(value = "/user", method = RequestMethod.POST, produces = "application/json")    //DEN LEITOYRGEI 
+	@RequestMapping(value = "/user", method = RequestMethod.POST, produces = "application/json")    //DEN LEITOYRGEI --WE DO NOT NEED IT FOR NOW  
     public Users addUser() {    //@RequestBody Users user
 		System.out.println("Education: REST: creation of new user ");
             
@@ -49,84 +65,44 @@ public class RestControllers {
     }
 	
 	
-	//LOGIN 
-	@RequestMapping(value = "/login/menu/{username}", method = RequestMethod.GET, produces = "application/json")
-	public @ResponseBody Users showMenu(HttpServletRequest request, @PathVariable String username) {
+	//AFTER THE  LOGIN ( WHEN IT WILL WORK ), ME TO POY FORTWNEI TO MENU , RETURNS USER THAT CONTAINS A LIST WITH THE  classes   
+	@RequestMapping(value = "/login/menu/{username}", method = RequestMethod.GET) //, produces = "application/json" )
+	public @ResponseBody String showMenu(@PathVariable String username, HttpSession session) {  
 		System.out.println("Education: ready to show: menu page");
 
-		Users user= new Users("Alekos", "Alekos", "Alekos","Sakellarios", "male", "alekos@hua.gr", "2102534712", "teacher", 3); 
-		
-		//the external app sends username
-		
+		//the external app sends the username
 		//retrieve from the database the password and then send it to the external 
-		
-	   // returns object type of Users, which contains the username and the password
+		mongodb = DAO.connect_to_database();
+		session.setAttribute("student's_username", username);    //add username in session 
+		String user = DAO.find_user(mongodb, username); 	   // returns string, which contains contains a json
 		return user;
 	}
-	
-	
-	//ME TO POY FORTWNEI TO MENU , MIA LISTA me classes 
-		@RequestMapping(value = "/login/menu/information/{username}", method = RequestMethod.GET)   //,  consumes = "application/json"
-		public String classList (HttpServletRequest request, @PathVariable String username) {
-			System.out.println("Education: ready to show: menu page");
 
-			
-			//the external sends the username and i find in the database 
-			
-			
-			
-           //SEND TO THE EXTERNAL JSON WHICH  contains the list with the classes 
-	       String json = "[{\"subject\" : \"Maths\", \"teacher\": \"Malvinaki Vamvakari\", \"students\": [\"Mary\" , \"Eleftheria\", \"Manos\"], \"quiz_ids\": [ ObjectId(\"507f191e810c19729de860ea\"), ObjectId(\"507f191e810c19729de860ea\") ]\"assignment_ids\": [ObjectId(\"507f191e810c19729de860ea\"), ObjectId(\"507f191e810c19729de860ea\") ]\"multimedia_ids\": [ ObjectId(\"507f191e810c19729de860ea\"), ObjectId(\"507f191e810c19729de860ea\")]}, {\\\"subject\\\" : \\\"Maths\\\", \\\"teacher\\\": \\\"Malvinaki Vamvakari\\\", \\\"students\\\": [\\\"Mary\\\" , \\\"Eleftheria\\\", \\\"Manos\\\"], \\\"quiz_ids\\\": [ ObjectId(\\\"507f191e810c19729de860ea\\\"), ObjectId(\\\"507f191e810c19729de860ea\\\") ]\\\"assignment_ids\\\": [ObjectId(\\\"507f191e810c19729de860ea\\\"), ObjectId(\\\"507f191e810c19729de860ea\\\") ]\\\"multimedia_ids\\\": [ ObjectId(\\\"507f191e810c19729de860ea\\\"), ObjectId(\\\"507f191e810c19729de860ea\\\")]}]";   
-		
-           return json ;
-		}
-	
-	
 	//STUDENTS: MENU --> OPTIONS --> RESULTS 
-	//PROJECTS
-	@RequestMapping(value = "/login/menu/projects", method = RequestMethod.GET)   // produces = "application/json",consumes = "application/json"
-	//List<Assignments>
-	public String returnAssignments( ) {
+	//PROJECTS  -- ASSIGNMENTS
+	@RequestMapping(value = "/login/menu/projects", method = RequestMethod.GET)   
+	public @ResponseBody String returnAssignments(HttpSession session) {
 		System.out.println("Education: ready to show: menu page");
-		
-	    List<Assignments> theProjects = new ArrayList<>();  //Assignments 
-		
-		//Assignments assingment1 = new Assignments("1", "assignment_type", "This is your assignment ", solutions);  //solutions-> array 
-		//Assignments assingment2 = new Assignments("2", "assignment_type", "This is your assignment ", solutions);  //solutions-> array 
-
-//		theProjects.add(assingment1);
-//		theProjects.add(assingment2);
-//		
-		
-		//String json = "{\"Title\": \"This is the home-page\"}";
-		
-		String json2 = "[{\"_id\": \"ObjectId(...)\", \"class\": \"MAths\",\"assignment\": \"To be or not to be. Analyze it.\",\"assignment_type\": \"text\",\"solutions\": [{\"student\": \"Mary\",\"solution\": \"death is all around us\"}]}]";
-		
-		//the external app sends username
-		
+					
 		//retrieve from the database the projects and then send them to the external 
+		mongodb = DAO.connect_to_database();
+		String Assignments = DAO.find_Assignments_for_a_student(mongodb, session) ;
 		
 	   // returns object type of Users, which contains the username and the password
-		return json2;     //thePrjects 
+		return  Assignments;    
 	}
 	
 	
 	//QUIZES 
-	@RequestMapping(value = "/login/menu/quizes", method = RequestMethod.GET, produces = "application/json")  //,  consumes = "application/json"
-	public List<Quizes> returnquizes(HttpServletRequest request) {  //, @PathVariable String username
+	@RequestMapping(value = "/login/menu/quizes", method = RequestMethod.GET, produces = "application/json")
+	public String returnquizes(HttpSession session) { 
 		System.out.println("Education: ready to show: menu page");
-		
-		String[] questions = new String [] {"test3","test4","test5"};
-		List<Quizes> theQuizes = new ArrayList<>();
-		Quizes quiz = new Quizes("1", "title", "date", questions);  
-		Quizes quiz1 = new Quizes("2", "title", "date",  questions);  
-		Quizes quiz2 = new Quizes("3", "title", "date",  questions);  
-		theQuizes.add(quiz);
-		theQuizes.add(quiz1);
-		theQuizes.add(quiz2);
-		
+	
 		//retrieve from the database the quizes and then send them to the external 
-		
+		//retrieve from the database the projects and then send them to the external 
+	    mongodb = DAO.connect_to_database();
+		String  theQuizes = DAO.find_Assignments_for_a_student(mongodb, session) ;
+				
 	   // returns the list with the quizes
 		return theQuizes;
 	}
@@ -137,8 +113,6 @@ public class RestControllers {
 //		System.out.println("Education: ready to show: menu page");
 //		
 //		private List<> theQuizes;
-//		
-//		//the external app sends username
 //		
 //		//retrieve from the database the projects and then send them to the external 
 //		
@@ -154,8 +128,6 @@ public class RestControllers {
 //		
 //		private List<> theReadings;
 //		
-//		//the external app sends username
-//		
 //		//retrieve from the database the projects and then send them to the external 
 //		
 //	   // returns the list with the
@@ -168,8 +140,6 @@ public class RestControllers {
 //		System.out.println("Education: ready to show: menu page");
 //		
 //		private List<> theAnnouncements   ;
-//		
-//		//the external app sends username
 //		
 //		//retrieve from the database the projects and then send them to the external 
 //		

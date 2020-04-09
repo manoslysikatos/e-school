@@ -26,11 +26,9 @@
 	</servlet-mapping>  
  
  
- 
- 
- 
- 
- 
- 
+ 	<!-- Session Configuration -->
+	<session-config>
+		<session-timeout>630</session-timeout>  <!-- 15 minutes -->
+	</session-config>
  
 </web-app>

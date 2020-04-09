@@ -40,8 +40,6 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 	
-	<tx:annotation-driven
-		transaction-manager="myTransactionManager" />
 
 
 	<!-- Add support for reading web resources: css, images, js, etc ... -->

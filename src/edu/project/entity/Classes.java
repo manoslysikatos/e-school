@@ -26,13 +26,13 @@ public class Classes implements Serializable{
 	protected String students[];     //arrays in mongodb
 	
 	@Field(name = "quiz_ids")
-	protected String quiz_ids[];          //int or string ?
+	protected String quiz_ids[];         
 	
 	@Field(name = "assignment_ids")
-	protected String assignment_ids[];   //int or string ?
+	protected String assignment_ids[];  
 	 
 	@Field(name = "multimedia_ids")
-	protected String multimedia_ids[];    //int or string ?
+	protected String multimedia_ids[];  
 		
 	
 	
