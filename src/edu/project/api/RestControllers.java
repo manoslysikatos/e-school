@@ -95,7 +95,7 @@ public class RestControllers {
 	
 	//QUIZES 
 	@RequestMapping(value = "/login/menu/quizes", method = RequestMethod.GET, produces = "application/json")
-	public String returnquizes(HttpSession session) { 
+	public @ResponseBody String returnquizes(HttpSession session) { 
 		System.out.println("Education: ready to show: menu page");
 	
 		//retrieve from the database the quizes and then send them to the external 
