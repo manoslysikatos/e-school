@@ -15,6 +15,7 @@ import com.mongodb.client.MongoDatabase;
 import javax.servlet.http.HttpSession;
 
 import edu.project.entity.*;
+import net.bytebuddy.implementation.bind.annotation.AllArguments.Assignment;
 import edu.project.database.*;
 
 
@@ -86,10 +87,9 @@ public class RestControllers {
 					
 		//retrieve from the database the projects and then send them to the external 
 		mongodb = DAO.connect_to_database();
-		String Assignments = DAO.find_Assignments_for_a_student(mongodb, session) ;
-		
-	   // returns object type of Users, which contains the username and the password
-		return  Assignments;    
+		//retrieve from database all the assignments for the user/student and return them 
+		List <String>  Assignments = DAO.find_Assignments_for_a_student(mongodb, session) ;    
+		return Assignments.toString();
 	}
 	
 	
@@ -99,12 +99,11 @@ public class RestControllers {
 		System.out.println("Education: ready to show: menu page");
 	
 		//retrieve from the database the quizes and then send them to the external 
-		//retrieve from the database the projects and then send them to the external 
 	    mongodb = DAO.connect_to_database();
-		String  theQuizes = DAO.find_Assignments_for_a_student(mongodb, session) ;
+		//retrieve from database all the assignments for the user/student and return them 
+        List <String>  theQuizes = DAO.find_Quizes_for_a_student(mongodb, session);
 				
-	   // returns the list with the quizes
-		return theQuizes;
+		return theQuizes.toString();
 	}
 	
 //	//READINGS 
